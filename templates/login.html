@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в систему | LEASING CENTER</title>
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --primary-light: #2a4ba0;
+            --accent: #4a6fc7;
+            --dark: #0e1a35;
+            --darker: #0a1428;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            padding: 1em;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .login-container {
+            background: rgba(26, 58, 143, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 111, 199, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--light);
+            margin: 0 0 1.5rem 0;
+            font-weight: 300;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(10, 20, 40, 0.7);
+            color: var(--light);
+            border: 1px solid rgba(74, 111, 199, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(74, 111, 199, 0.2);
+        }
+
+        input::placeholder {
+            color: var(--gray);
+            opacity: 0.7;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        .error {
+            color: #ff6b6b;
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .subtext {
+            color: var(--gray);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .register-link a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .register-link a:hover {
+            color: var(--light);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>LEASING CENTER</h1>
+            <p class="subtext">Система управления лизингом</p>
+        </div>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" class="login-form">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Пароль" required>
+            </div>
+
+            <button type="submit">Войти</button>
+        </form>
+
+        <div class="register-link">
+            Нет аккаунта? <a href="/register">Зарегистрироваться</a>
+        </div>
+    </div>
+</body>
+</html>

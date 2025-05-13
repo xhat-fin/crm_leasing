@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Leasing Center | Главная</title>
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --primary-light: #2a4ba0;
+            --accent: #4a6fc7;
+            --dark: #0e1a35;
+            --darker: #0a1428;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            padding: 2em;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative; /* Добавляем для правильного позиционирования меню */
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            color: var(--light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .module-card {
+            background: rgba(26, 58, 143, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 111, 199, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+
+        .module-card h2 {
+            color: var(--light);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .module-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .module-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--light);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .module-link:hover {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            box-shadow: 0 4px 15px rgba(26, 58, 143, 0.4);
+        }
+
+        .coming-soon {
+            background: rgba(74, 111, 199, 0.1) !important;
+            color: var(--gray) !important;
+            cursor: not-allowed;
+        }
+
+        /* Стили для меню пользователя */
+        .user-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .user-btn {
+            background: rgba(10, 20, 40, 0.7);
+            border: 1px solid var(--accent);
+            color: var(--light);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-btn:hover {
+            background: rgba(74, 111, 199, 0.2);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: rgba(26, 58, 143, 0.9);
+            border-radius: 8px;
+            border: 1px solid rgba(74, 111, 199, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            display: none;
+        }
+
+        .user-dropdown a {
+            color: var(--light);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .user-dropdown a:hover {
+            background: rgba(74, 111, 199, 0.3);
+        }
+
+        .show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1 style="color: var(--light); margin: 0;">LEASING CENTER</h1>
+            <p style="color: var(--gray); margin-top: 0.5rem;">Система управления лизинговыми операциями</p>
+        </div>
+
+        <div class="modules-grid">
+            <!-- Модуль менеджеров по лизингу -->
+            <div class="module-card" onclick="window.location.href='/deals'">
+                <h2>Менеджеры по лизингу</h2>
+                <p>Управление сделками и клиентами</p>
+                <a href="/deals" class="module-link">Перейти</a>
+            </div>
+
+            <!-- Модуль кредитных экспертов -->
+            <div class="module-card" onclick="window.location.href='/expert/deals'">
+                <h2>Кредитные эксперты</h2>
+                <p>Анализ кредитоспособности и риск-менеджмент</p>
+                <a href="/expert/deals" class="module-link">Перейти</a>
+            </div>
+
+            <!-- Модуль сотрудников -->
+            <div class="module-card" onclick="window.location.href='/employees'">
+                <h2>Сотрудники</h2>
+                <p>Управление персоналом и доступом к системе</p>
+                <a href="/employees" class="module-link">Перейти</a>
+            </div>
+
+            <!-- Модуль клиентов -->
+            <div class="module-card" onclick="window.location.href='/clients'">
+                <h2>Клиенты</h2>
+                <p>База клиентов и история взаимодействий</p>
+                <a href="/clients" class="module-link">Перейти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Меню пользователя -->
+    <div class="user-menu">
+        <div class="user-btn" onclick="toggleUserMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+            <div style="padding: 12px 16px; color: var(--gray); border-bottom: 1px solid rgba(74, 111, 199, 0.3);">
+                {{ session.username }}
+            </div>
+            <a href="/logout">Выйти</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleUserMenu() {
+            document.getElementById('userDropdown').classList.toggle('show');
+        }
+
+        // Закрываем меню при клике вне его
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-btn')) {
+                var dropdowns = document.getElementsByClassName("user-dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

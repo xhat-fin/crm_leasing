@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Сделка #{{ deal[0] }} | LEASING CENTER</title>
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --primary-light: #2a4ba0;
+            --accent: #4a6fc7;
+            --dark: #0e1a35;
+            --darker: #0a1428;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            padding: 2em;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 2.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .deal-card {
+            background: rgba(26, 58, 143, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 111, 199, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .deal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .deal-field {
+            margin-bottom: 1.2rem;
+        }
+
+        .deal-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .deal-value {
+            color: var(--light);
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(74, 111, 199, 0.3);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: rgba(10, 20, 40, 0.7);
+            padding: 12px 24px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(74, 111, 199, 0.1);
+            border-color: var(--primary-light);
+            color: var(--light);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .deal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .transfer-btn {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .edit-btn {
+            background: linear-gradient(to right, #2196F3, #0b7dda);
+            color: white;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <a href="/" style="text-decoration: none;">
+                <h2 style="color: var(--light); margin: 0;">LEASING CENTER</h2>
+            </a>
+        </div>
+
+        <a href="/deals" class="back-link">← Назад к списку сделок</a>
+
+
+        <div class="action-buttons">
+        <a href="/edit_deal/{{ deal[0] }}" class="btn edit-btn">Редактировать сделку</a>
+            <!-- Просто показываем кнопку без условий -->
+            <button id="transferBtn" class="btn transfer-btn">Передать эксперту</button>
+        </div>
+        <h1>Сделка №{{ deal[0] }}</h1>
+        <div class="deal-card">
+
+            <div class="deal-grid">
+                <div class="deal-field">
+                    <span class="deal-label">Дата первого контакта</span>
+                    <div class="deal-value">{{ deal[1] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Менеджер</span>
+                    <div class="deal-value">{{ deal[2] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Клиент</span>
+                    <div class="deal-value">{{ deal[3] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">УНП</span>
+                    <div class="deal-value">{{ deal[24] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Бренд авто</span>
+                    <div class="deal-value">{{ deal[4] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Продажа авто</span>
+                    <div class="deal-value">{{ deal[5] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">СКП или БЛ</span>
+                    <div class="deal-value">{{ deal[6] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Статус</span>
+                    <div class="deal-value">{{ deal[7] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Отгрузка или подписание</span>
+                    <div class="deal-value">{{ deal[8] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Предоплата</span>
+                    <div class="deal-value">{{ deal[9] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Срок договора</span>
+                    <div class="deal-value">{{ deal[10] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Валюта договора</span>
+                    <div class="deal-value">{{ deal[11] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Процентная ставка</span>
+                    <div class="deal-value">{{ deal[12] or '—' }}%</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Сертификат (используется)</span>
+                    <div class="deal-value">
+                        №{{ deal[13] or '—' }} от {{ deal[14] or '—' }}
+                    </div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Сертификат (выдан)</span>
+                    <div class="deal-value">
+                        №{{ deal[15] or '—' }} от {{ deal[16] or '—' }}
+                    </div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Экспресс</span>
+                    <div class="deal-value">{{ 'Да' if deal[17] else 'Нет' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Электромобиль</span>
+                    <div class="deal-value">{{ 'Да' if deal[18] else 'Нет' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Сумма финансирования</span>
+                    <div class="deal-value">{{ deal[19] or '—' }} {{ deal[11] or '' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Плановая дата отгрузки</span>
+                    <div class="deal-value">{{ deal[20] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Канал продаж</span>
+                    <div class="deal-value">{{ deal[22] or '—' }}</div>
+                </div>
+
+                <div class="deal-field">
+                    <span class="deal-label">Имя агента</span>
+                    <div class="deal-value">{{ deal[23] or '—' }}</div>
+                </div>
+            </div>
+
+            <div class="deal-field" style="grid-column: span 2; margin-top: 1.5rem;">
+                <span class="deal-label">Описание</span>
+                <div class="deal-value" style="min-height: 80px; white-space: pre-line;">{{ deal[21] or '—' }}</div>
+            </div>
+        </div>
+
+    </div>
+<script>
+    document.getElementById('transferBtn').addEventListener('click', function() {
+        if (confirm('Вы уверены, что хотите передать сделку кредитному эксперту?')) {
+            fetch('/transfer_to_expert/{{ deal[0] }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.reload();
+                } else {
+                    alert('Ошибка: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка при передаче сделки');
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Leasing Center | Регистрация</title>
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --primary-light: #2a4ba0;
+            --accent: #4a6fc7;
+            --dark: #0e1a35;
+            --darker: #0a1428;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            padding: 2em;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(26, 58, 143, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--light);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 2.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        input, select {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(74, 111, 199, 0.2);
+            background: rgba(74, 111, 199, 0.15);
+            color: var(--light);
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            padding: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 1000;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+
+        }
+
+        button:hover {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            box-shadow: 0 4px 15px rgba(26, 58, 143, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1em;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация</h1>
+        <form action="/register" method="POST">
+            <input type="text" name="username" placeholder="Логин" required>
+            <input type="text" name="full_name" placeholder="ФИО" required>
+
+            <!-- Выпадающий список для выбора роли -->
+            <select name="role" required>
+                <option value="manager">Менеджер</option>
+                <option value="accountant">Бухгалтер-оформитель</option>
+                <option value="expert">Кредитный эксперт</option>
+            </select>
+
+            <input type="password" name="password" placeholder="Пароль" required>
+            <input type="password" name="confirm_password" placeholder="Подтвердите пароль" required>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</body>
+</html>

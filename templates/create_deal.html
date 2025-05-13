@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание сделки | LC</title>
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --primary-light: #2a4ba0;
+            --accent: #4a6fc7;
+            --dark: #0e1a35;
+            --darker: #0a1428;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            padding: 2em;
+            min-height: 100vh;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 2.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: rgba(26, 58, 143, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(74, 111, 199, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-top: 1.2rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(10, 20, 40, 0.7);
+            color: var(--light);
+            border: 1px solid rgba(74, 111, 199, 0.3);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(74, 111, 199, 0.2);
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+            margin-top: 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 1.2rem;
+        }
+
+        button {
+            margin-top: 2rem;
+            padding: 14px 28px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(26, 58, 143, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 58, 143, 0.4);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Back link styles */
+        .back-link-container {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(10, 20, 40, 0.7);
+            padding: 12px 24px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(74, 111, 199, 0.1);
+            border-color: var(--primary-light);
+            color: var(--light);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(26, 58, 143, 0.9);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid var(--accent);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-close {
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            body {
+                padding: 1em;
+            }
+
+            form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <a href="/" style="text-decoration: none;">
+                <h2 style="color: var(--light); margin: 0;">LEASING CENTER</h2>
+            </a>
+        </div>
+
+        <h1>Создать новую сделку</h1>
+
+        <div class="back-link-container">
+            <a href="/deals" class="back-link">← Назад к списку сделок</a>
+        </div>
+
+        <form id="dealForm" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Дата первого контакта:
+                        <input type="datetime-local" name="date_first_contact">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Название клиента:
+                        <input type="text" name="name_client" required>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>УНП клиента:
+                        <input type="text" name="unp_client" required>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Марка авто:
+                        <input type="text" name="car_brand">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Продавец авто:
+                        <input type="text" name="sales_car">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>СКП или БЛ:</label>
+                    <select name="skp_or_bl">
+                        <option value="">Выберите вариант</option>
+                        <option value="СКП">СКП</option>
+                        <option value="БЛ">БЛ</option>
+                        <option value="СКП/БЛ">СКП/БЛ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Статус заявки</label>
+                    <select name="status" required>
+                        <option value="Согласование условий">Согласование условий</option>
+                        <option value="Отказ банка">Отказ банка</option>
+                        <option value="Отказ клиента">Отказ клиента</option>
+                        <option value="На рассмотрении">На рассмотрении</option>
+                        <option value="Сбор документов">Сбор документов</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Отгрузка или подписание:</label>
+                    <select name="shipment_or_signing">
+                        <option value="Отгрузка">Отгрузка</option>
+                        <option value="Подписание">Подписание</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Собственное участие:
+                        <input type="text" name="prepayment">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Срок:
+                        <input type="number" name="contract_term">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Валюта договора:</label>
+                    <select name="currency_contract">
+                        <option value="BYN">BYN</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="RUB">RUB</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ставка +ППС для разовой СЛП:
+                        <input type="number" step="0.01" name="interest_rate">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Номер примененного сертификата:
+                        <input type="number" name="use_number_cert">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Дата примененного сертификата:
+                        <input type="date" name="use_date_cert">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Номер выданного сертификата:
+                        <input type="number" name="issued_number_cert">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Дата выданного сертификата:
+                        <input type="date" name="issued_date_cert">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="express"> Экспресс
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="electric_car"> Электромобиль
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>Сумма финансирования:
+                    <input type="number" step="0.01" name="amount_financing">
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>План. дата отгрузки:
+                    <input type="date" name="m_plan_ship">
+                </label>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Описание:
+                    <textarea name="description" rows="4"></textarea>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>Канал продаж:
+                    <input type="text" name="sales_channel">
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>Имя агента:
+                    <input type="text" name="name_agent">
+                </label>
+            </div>
+
+            <button type="submit">Сохранить сделку</button>
+        </form>
+    </div>
+
+    <!-- Modal for success message -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalMessage">Сделка успешно добавлена!</h3>
+            <button class="modal-close" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('dealForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            fetch('/create_deal', {
+                method: 'POST',
+                body: new FormData(this)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('modalMessage').textContent = data.message;
+                    document.getElementById('successModal').style.display = 'flex';
+                } else {
+                    alert('Ошибка при добавлении сделки: ' + (data.message || 'Неизвестная ошибка'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка при отправке формы');
+            });
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
